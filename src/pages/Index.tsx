@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Camera, DollarSign, Clock, Calculator, Package, FileText, MessageSquare, ChevronDown, Users } from "lucide-react";
 import appMockup from "@/assets/app-mockup.png";
+import { useForm, ValidationError } from '@formspree/react'
 
 // ─── HERO ───────────────────────────────────────────────
 
@@ -45,7 +46,7 @@ const SocialProofBar = () => (
       <div className="hidden sm:block w-px h-4 bg-border" />
       <div className="flex items-center gap-2">
         <MessageSquare className="w-4 h-4 text-primary" />
-        <span>"I had no idea I was losing €300 per wedding" — <span className="text-foreground font-medium">event photographer, Ljubljana</span></span>
+        <span>"I had no idea I was losing €300 per wedding" — <span className="text-foreground font-medium">event photographer</span></span>
       </div>
     </div>
   </section>
@@ -264,22 +265,7 @@ const FAQSection = () => {
 const SPOTS_REMAINING = 47;
 
 const WaitlistSection = () => {
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
-
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
-    })
-      .then(() => setSubmitted(true))
-      .catch(() => setSubmitted(true));
-
-    e.preventDefault();
-  };
+  const [state, handleSubmit] = useForm("mvzblpvz");
 
   return (
     <section id="waitlist" className="px-6 py-24">
@@ -294,7 +280,7 @@ const WaitlistSection = () => {
           {SPOTS_REMAINING} / 50 early access spots remaining
         </p>
 
-        {submitted ? (
+        {state.succeeded ? (
           <div className="p-6 rounded-xl border border-primary/30 bg-primary/5">
             <p className="text-lg font-semibold text-primary">You're in! 🎉</p>
             <p className="text-sm text-muted-foreground mt-1">
@@ -303,22 +289,25 @@ const WaitlistSection = () => {
           </div>
         ) : (
           <form
-            name="waitlist"
-            method="POST"
-            data-netlify="true"
             onSubmit={handleSubmit}
             className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
           >
-            <input type="hidden" name="form-name" value="waitlist" />
             <Input
+              id="email"
               type="email"
               name="email"
               required
               placeholder="your@email.com"
               className="flex-1 h-12 bg-card border-border text-foreground placeholder:text-muted-foreground"
             />
-            <Button variant="hero" type="submit" className="h-12 px-8 rounded-lg">
-              Join the Waitlist
+            <ValidationError prefix="Email" field="email" errors={state.errors} />
+            <Button
+              variant="hero"
+              type="submit"
+              disabled={state.submitting}
+              className="h-12 px-8 rounded-lg"
+            >
+              {state.submitting ? "Joining..." : "Join the Waitlist"}
             </Button>
           </form>
         )}
@@ -332,7 +321,7 @@ const WaitlistSection = () => {
 const Footer = () => (
   <footer className="px-6 py-8 border-t border-border">
     <p className="text-center text-sm text-muted-foreground">
-      ShootRate · Built for photographers · 2025
+      ShootRate · Built for photographers · 2026
     </p>
   </footer>
 );
@@ -347,7 +336,6 @@ const Index = () => (
     <ProblemSection />
     <HowItWorksSection />
     <PricingPreview />
-    <FAQSection />
     <WaitlistSection />
     <Footer />
   </div>
