@@ -2,6 +2,9 @@ import { useState, FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Camera, DollarSign, Clock, Calculator, Package, FileText } from "lucide-react";
+import testimonialSarah from "@/assets/testimonial-sarah.jpg";
+import testimonialJames from "@/assets/testimonial-james.jpg";
+import testimonialPriya from "@/assets/testimonial-priya.jpg";
 
 const HeroSection = () => (
   <section className="min-h-[90vh] flex items-center justify-center px-6 py-24">
@@ -193,18 +196,21 @@ const testimonials = [
     name: "Sarah M.",
     role: "Wedding Photographer",
     location: "Austin, TX",
+    photo: testimonialSarah,
   },
   {
     quote: "The PDF quotes alone are worth it. My clients take me way more seriously now. Bookings went up 30%.",
     name: "James K.",
     role: "Portrait & Commercial",
     location: "Brooklyn, NY",
+    photo: testimonialJames,
   },
   {
     quote: "I used to spend Sunday nights on spreadsheets. Now I set my prices in 10 minutes and actually enjoy my weekends.",
     name: "Priya L.",
     role: "Event Photographer",
     location: "Toronto, CA",
+    photo: testimonialPriya,
   },
 ];
 
@@ -233,9 +239,12 @@ const TestimonialsSection = () => (
               </div>
               <p className="text-sm leading-relaxed text-foreground/90 mb-6">"{t.quote}"</p>
             </div>
-            <div>
-              <p className="font-display font-semibold text-sm">{t.name}</p>
-              <p className="text-xs text-muted-foreground">{t.role} · {t.location}</p>
+            <div className="flex items-center gap-3">
+              <img src={t.photo} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
+              <div>
+                <p className="font-display font-semibold text-sm">{t.name}</p>
+                <p className="text-xs text-muted-foreground">{t.role} · {t.location}</p>
+              </div>
             </div>
           </div>
         ))}
