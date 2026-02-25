@@ -70,6 +70,10 @@ const MockupSection = () => (
           className="w-full h-auto"
           loading="lazy"
         />
+              <p className="text-muted-foreground text-center mb-1 max-w-lg mx-auto">
+        Not actual app.
+      </p>
+        
       </div>
     </div>
   </section>
