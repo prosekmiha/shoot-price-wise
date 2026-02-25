@@ -1,7 +1,10 @@
 import { useState, FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Camera, DollarSign, Clock, Calculator, Package, FileText } from "lucide-react";
+import { Camera, DollarSign, Clock, Calculator, Package, FileText, MessageSquare, ChevronDown, Users } from "lucide-react";
+import appMockup from "@/assets/app-mockup.png";
+
+// ─── HERO ───────────────────────────────────────────────
 
 const HeroSection = () => (
   <section className="min-h-[90vh] flex items-center justify-center px-6 py-24">
@@ -11,8 +14,8 @@ const HeroSection = () => (
         <span className="text-sm text-secondary-foreground">Pricing tool for freelance photographers</span>
       </div>
       <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-        Finally know what every shoot{" "}
-        <span className="text-primary">actually costs you.</span>
+        Most photographers undercharge by{" "}
+        <span className="text-primary">€200–400 per booking.</span>
       </h1>
       <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
         ShootRate calculates your real hourly rate, package prices, and generates
@@ -29,6 +32,49 @@ const HeroSection = () => (
     </div>
   </section>
 );
+
+// ─── SOCIAL PROOF BAR ───────────────────────────────────
+
+const SocialProofBar = () => (
+  <section className="px-6 py-10 border-y border-border">
+    <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-sm text-muted-foreground">
+      <div className="flex items-center gap-2">
+        <Users className="w-4 h-4 text-primary" />
+        <span>Built after talking to <span className="text-foreground font-medium">50+ freelance photographers</span></span>
+      </div>
+      <div className="hidden sm:block w-px h-4 bg-border" />
+      <div className="flex items-center gap-2">
+        <MessageSquare className="w-4 h-4 text-primary" />
+        <span>"I had no idea I was losing €300 per wedding" — <span className="text-foreground font-medium">event photographer, Ljubljana</span></span>
+      </div>
+    </div>
+  </section>
+);
+
+// ─── MOCKUP ─────────────────────────────────────────────
+
+const MockupSection = () => (
+  <section className="px-6 py-20 bg-card">
+    <div className="max-w-5xl mx-auto">
+      <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-4">
+        See what you're getting.
+      </h2>
+      <p className="text-muted-foreground text-center mb-12 max-w-lg mx-auto">
+        Enter your costs, get your rates, send professional quotes.
+      </p>
+      <div className="rounded-xl border border-border overflow-hidden shadow-2xl shadow-primary/5">
+        <img
+          src={appMockup}
+          alt="ShootRate app — cost breakdown dashboard showing hourly rate calculation and PDF quote generation"
+          className="w-full h-auto"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+);
+
+// ─── PROBLEM ────────────────────────────────────────────
 
 const problems = [
   {
@@ -52,11 +98,11 @@ const problems = [
 ];
 
 const ProblemSection = () => (
-  <section className="px-6 py-24 bg-card">
+  <section className="px-6 py-24">
     <div className="max-w-5xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {problems.map((p) => (
-          <div key={p.title} className="text-center p-8 rounded-xl bg-background border border-border">
+          <div key={p.title} className="text-center p-8 rounded-xl bg-card border border-border">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 mb-5">
               <p.icon className="w-6 h-6 text-primary" />
             </div>
@@ -68,6 +114,8 @@ const ProblemSection = () => (
     </div>
   </section>
 );
+
+// ─── HOW IT WORKS ───────────────────────────────────────
 
 const steps = [
   {
@@ -92,7 +140,7 @@ const steps = [
 ];
 
 const HowItWorksSection = () => (
-  <section className="px-6 py-24">
+  <section className="px-6 py-24 bg-card">
     <div className="max-w-5xl mx-auto">
       <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-4">
         How it works
@@ -102,7 +150,7 @@ const HowItWorksSection = () => (
       </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {steps.map((s) => (
-          <div key={s.step} className="relative p-8 rounded-xl border border-border bg-card">
+          <div key={s.step} className="relative p-8 rounded-xl border border-border bg-background">
             <span className="font-display text-4xl font-bold text-primary/20 mb-4 block">
               {s.step}
             </span>
@@ -117,6 +165,103 @@ const HowItWorksSection = () => (
     </div>
   </section>
 );
+
+// ─── PRICING PREVIEW ────────────────────────────────────
+
+const PricingPreview = () => (
+  <section className="px-6 py-24">
+    <div className="max-w-md mx-auto text-center">
+      <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
+        Simple pricing.
+      </h2>
+      <p className="text-muted-foreground mb-10">
+        No subscriptions. No hidden fees. Pay once, use forever.
+      </p>
+      <div className="rounded-xl border border-primary/30 bg-card p-8">
+        <p className="text-sm text-muted-foreground mb-2 uppercase tracking-wide font-medium">One-time payment</p>
+        <div className="flex items-baseline justify-center gap-1 mb-1">
+          <span className="font-display text-5xl font-bold text-primary">€24</span>
+        </div>
+        <p className="text-sm text-muted-foreground mb-6">Lifetime access · Free updates · Works offline</p>
+        <div className="space-y-2 text-sm text-left max-w-xs mx-auto mb-8">
+          {[
+            "Unlimited packages & quotes",
+            "PDF quote generation",
+            "Cost & rate calculator",
+            "All future updates included",
+          ].map((f) => (
+            <div key={f} className="flex items-center gap-2">
+              <span className="text-primary">✓</span>
+              <span className="text-secondary-foreground">{f}</span>
+            </div>
+          ))}
+        </div>
+        <a href="#waitlist">
+          <Button variant="hero" className="w-full h-12 rounded-lg">
+            Join the Waitlist — 40% off at launch
+          </Button>
+        </a>
+      </div>
+    </div>
+  </section>
+);
+
+// ─── FAQ ────────────────────────────────────────────────
+
+const faqs = [
+  {
+    q: "Is it really a one-time payment?",
+    a: "Yes. You pay €24 once and get lifetime access, including all future updates. No subscriptions, no recurring fees.",
+  },
+  {
+    q: "Mac or Windows?",
+    a: "ShootRate will be available for both macOS and Windows at launch.",
+  },
+  {
+    q: "What if I'm not tech-savvy?",
+    a: "ShootRate is designed to be simple. If you can fill out a form, you can use it. No spreadsheet skills needed.",
+  },
+];
+
+const FAQSection = () => {
+  const [open, setOpen] = useState<number | null>(null);
+
+  return (
+    <section className="px-6 py-24 bg-card">
+      <div className="max-w-2xl mx-auto">
+        <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-12">
+          Questions?
+        </h2>
+        <div className="space-y-3">
+          {faqs.map((faq, i) => (
+            <div key={i} className="rounded-xl border border-border bg-background overflow-hidden">
+              <button
+                onClick={() => setOpen(open === i ? null : i)}
+                className="flex items-center justify-between w-full p-5 text-left"
+              >
+                <span className="font-display font-semibold text-sm">{faq.q}</span>
+                <ChevronDown
+                  className={`w-4 h-4 text-muted-foreground shrink-0 transition-transform ${
+                    open === i ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              {open === i && (
+                <div className="px-5 pb-5 -mt-1">
+                  <p className="text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ─── WAITLIST ───────────────────────────────────────────
+
+const SPOTS_REMAINING = 47;
 
 const WaitlistSection = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -137,13 +282,16 @@ const WaitlistSection = () => {
   };
 
   return (
-    <section id="waitlist" className="px-6 py-24 bg-card">
+    <section id="waitlist" className="px-6 py-24">
       <div className="max-w-lg mx-auto text-center">
         <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
           Be among the first.
         </h2>
-        <p className="text-muted-foreground mb-10">
+        <p className="text-muted-foreground mb-3">
           First 50 on the waitlist get <span className="text-primary font-semibold">40% off</span> at launch.
+        </p>
+        <p className="text-sm font-medium text-primary mb-10">
+          {SPOTS_REMAINING} / 50 early access spots remaining
         </p>
 
         {submitted ? (
@@ -167,7 +315,7 @@ const WaitlistSection = () => {
               name="email"
               required
               placeholder="your@email.com"
-              className="flex-1 h-12 bg-background border-border text-foreground placeholder:text-muted-foreground"
+              className="flex-1 h-12 bg-card border-border text-foreground placeholder:text-muted-foreground"
             />
             <Button variant="hero" type="submit" className="h-12 px-8 rounded-lg">
               Join the Waitlist
@@ -179,6 +327,8 @@ const WaitlistSection = () => {
   );
 };
 
+// ─── FOOTER ─────────────────────────────────────────────
+
 const Footer = () => (
   <footer className="px-6 py-8 border-t border-border">
     <p className="text-center text-sm text-muted-foreground">
@@ -187,72 +337,17 @@ const Footer = () => (
   </footer>
 );
 
-const testimonials = [
-  {
-    quote: "I was undercharging by almost $800 per wedding. ShootRate showed me exactly where the money was leaking.",
-    name: "Sarah M.",
-    role: "Wedding Photographer",
-    location: "Austin, TX",
-    
-  },
-  {
-    quote: "The PDF quotes alone are worth it. My clients take me way more seriously now. Bookings went up 30%.",
-    name: "James K.",
-    role: "Portrait & Commercial",
-    location: "Brooklyn, NY",
-    
-  },
-  {
-    quote: "I used to spend Sunday nights on spreadsheets. Now I set my prices in 10 minutes and actually enjoy my weekends.",
-    name: "Priya L.",
-    role: "Event Photographer",
-    location: "Toronto, CA",
-    
-  },
-];
-
-const TestimonialsSection = () => (
-  <section className="px-6 py-24">
-    <div className="max-w-5xl mx-auto">
-      <h2 className="font-display text-3xl sm:text-4xl font-bold text-center mb-4">
-        Photographers already love it.
-      </h2>
-      <p className="text-muted-foreground text-center mb-16 max-w-lg mx-auto">
-        Hear from beta testers who transformed their pricing.
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {testimonials.map((t) => (
-          <div
-            key={t.name}
-            className="p-6 rounded-xl border border-border bg-card flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-4 h-4 text-primary fill-primary" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-sm leading-relaxed text-foreground/90 mb-6">"{t.quote}"</p>
-            </div>
-            <div>
-              <p className="font-display font-semibold text-sm">{t.name}</p>
-              <p className="text-xs text-muted-foreground">{t.role} · {t.location}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
+// ─── PAGE ───────────────────────────────────────────────
 
 const Index = () => (
   <div className="min-h-screen bg-background">
     <HeroSection />
+    <SocialProofBar />
+    <MockupSection />
     <ProblemSection />
     <HowItWorksSection />
-    <TestimonialsSection />
+    <PricingPreview />
+    <FAQSection />
     <WaitlistSection />
     <Footer />
   </div>
